@@ -1,0 +1,49 @@
+### sign up
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+    "email": "ca2@a.pl",
+    "password": "haslo"
+}
+
+### sign in
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+    "email": "ca2@a.pl",
+    "password": "haslo"
+}
+
+### sign out
+POST http://localhost:3000/auth/signout
+
+### WhoAmI 
+GET http://localhost:3000/auth/whoami
+
+### Find 
+GET http://localhost:3000/auth/222
+
+
+### Find all users
+GET http://localhost:3000/auth?email=chuja@cos.pl
+
+### Find all users
+DELETE http://localhost:3000/auth/1
+
+### Update a user
+PATCH http://localhost:3000/auth/2
+Content-Type: application/json
+
+{
+    "email": "bbb@b.com",
+    "password": "aa"
+}
+
+
+### Set a color
+GET http://localhost:3000/auth/colors/red22
+
+### Get a color
+GET http://localhost:3000/auth/colors
