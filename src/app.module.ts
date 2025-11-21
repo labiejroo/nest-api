@@ -5,11 +5,29 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ReportsModule } from './reports/reports.module';
-import { User } from './users/user.entity';
-import { Report } from './reports/report.enity';
+// import { User } from './users/user.entity';
+// import { Report } from './reports/report.enity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { config } from 'process';
+// import { config } from 'process';
+// import * as dbConfig from '../ormconfig.js';
 const cookiesession = require('cookie-session');
+// TypeOrmModule.forRootAsync({
+//   inject: [ConfigService],
+//   useFactory: (config: ConfigService) => {
+//     return {
+//       type: 'sqlite',
+//       database: config.get<string>('DB_NAME'),
+//       entities: [User, Report],
+//       synchronize: true,
+//     }
+//   }
+// }),
+// TypeOrmModule.forRoot({
+//   type: 'sqlite',
+//   database: 'db.sqlite',
+//   entities: [User, Report],
+//   synchronize: true,
+// }), 
 
 @Module({
   imports: [
@@ -17,24 +35,9 @@ const cookiesession = require('cookie-session');
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`
     }),
-    TypeOrmModule.forRootAsync({
-      inject: [ConfigService],
-      useFactory: (config: ConfigService) => {
-        return {
-          type: 'sqlite',
-          database: config.get<string>('DB_NAME'),
-          entities: [User, Report],
-          synchronize: true,
-        }
-      }
-    }),
-    // TypeOrmModule.forRoot({
-    //   type: 'sqlite',
-    //   database: 'db.sqlite',
-    //   entities: [User, Report],
-    //   synchronize: true,
-    // }), 
-    UsersModule, ReportsModule
+    TypeOrmModule.forRoot(),
+    UsersModule, 
+    ReportsModule
   ],
   controllers: [AppController],
   providers: [AppService, 
