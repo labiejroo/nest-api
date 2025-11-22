@@ -6,10 +6,11 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ReportsModule } from './reports/reports.module';
 // import { User } from './users/user.entity';
-// import { Report } from './reports/report.enity';
+import { Report } from './reports/report.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 // import { config } from 'process';
-// import * as dbConfig from '../ormconfig.js';
+import * as dbConfig from '../ormconfig.js';
+import { User } from './users/user.entity';
 const cookiesession = require('cookie-session');
 // TypeOrmModule.forRootAsync({
 //   inject: [ConfigService],
@@ -35,7 +36,13 @@ const cookiesession = require('cookie-session');
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`
     }),
-    TypeOrmModule.forRoot(),
+    // TypeOrmModule.forRoot(dbConfig),
+    TypeOrmModule.forRoot({
+      type: 'sqlite',
+      database: 'db.sqlite',
+      entities: [User, Report],
+      synchronize: true,
+    }), 
     UsersModule, 
     ReportsModule
   ],
